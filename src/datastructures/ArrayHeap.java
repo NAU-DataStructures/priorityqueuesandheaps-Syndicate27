@@ -23,10 +23,17 @@ public class ArrayHeap<T> extends ArrayBinaryTree<T> implements HeapADT<T>
    //  position according to its key value.  Note that equal elements
    //  are added to the right.
    //================================================================
-   public void addElement (T obj) 
-   {
-       // Complete the code
-   } //method addElement
+   public void addElement (T obj) {
+       
+        if (count == tree.length)
+            expandCapacity();
+
+        tree[count] = obj;
+        count++;
+	    
+        if (count > 1)
+            heapifyAdd();
+    } //method addElement
 
    //================================================================
    //  Reorders the heap to maintain the ordering property
@@ -55,8 +62,24 @@ public class ArrayHeap<T> extends ArrayBinaryTree<T> implements HeapADT<T>
    //================================================================
    public T removeMin() throws EmptyCollectionException 
    {
-      
-      // Complete the code
+       
+        if (isEmpty())
+            throw new EmptyCollectionException("ArrayHeap");
+
+            T minElement = tree[0];
+            tree[0] = tree[count-1];
+            heapifyRemove();
+            count--;
+       
+        
+        
+        return minElement;
+
+    				
+
+
+       
+           
 
    }  // method removeMin
    
@@ -116,7 +139,7 @@ public class ArrayHeap<T> extends ArrayBinaryTree<T> implements HeapADT<T>
    public T findMin() throws EmptyCollectionException {
 
        //Complete the code
-
+        return tree[0];
    }  // method findMin
 
    
